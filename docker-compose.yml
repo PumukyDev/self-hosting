@@ -1,6 +1,6 @@
 services:
   nginx_proxy:
-    image: nginx:alpine
+    build: ./nginx
     container_name: nginx_proxy
     restart: unless-stopped
     ports:
@@ -11,6 +11,11 @@ services:
       - ./nginx/certs/:/etc/nginx/certs/
     networks:
       - proxy-network
+
+  dyndns:
+    build: ./dynamic-dns
+    container_name: dyndns
+    restart: unless-stopped
 
 networks:
   proxy-network:
